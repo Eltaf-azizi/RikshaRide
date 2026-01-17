@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../../services/firestore_service.dart';
-import '../../../../services/auth_service.dart';
+import '../../../../firestore_service.dart';
+import '../services/auth_service.dart';
 import '../../../../models/ride.dart';
 import '../../../../ride_control_screen.dart';
 
