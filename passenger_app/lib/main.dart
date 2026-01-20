@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import '../../../firebase_options.dart'; // You'll need to generate this
 import 'screens/home_screen.dart';
-import '../../../login_screen.dart';
+import 'screens/login_screen.dart';
 import 'services/auth_service.dart';
 import 'services/firestore_service.dart';
 
