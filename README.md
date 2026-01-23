@@ -25,3 +25,14 @@ RikshaRide consists of three main components:
 3. Firebase Backend – for real-time data and ride management
 
 This repository contains the core logic and structure required to run the MVP.
+
+
+## ✨ Key Features (MVP)
+### Passenger App
+
+ - Select pickup area from a predefined list
+ - Select destination area from a predefined list
+ - View estimated fare before booking
+ - Request a rickshaw ride
+ - Real-time ride status updates
+ - Call the assigned driver directly
