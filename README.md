@@ -5,7 +5,7 @@ RikshaRide is a lightweight, Android-first rickshaw booking application designed
 The project focuses on simplicity, trust, and reliability rather than flashy features. It is built to work smoothly on low-end Android devices and unstable internet connections.
 
 
-🎯 Project Vision
+## 🎯 Project Vision
 
 The goal of RikshaRide is to solve real, local transportation problems:
 
@@ -14,3 +14,14 @@ The goal of RikshaRide is to solve real, local transportation problems:
  - Lack of digital booking solutions tailored for small cities
 
 RikshaRide provides a simple request-and-accept system with fixed area-based pricing, making rides predictable and fair for both passengers and drivers.
+
+
+## 🧱 System Overview
+
+RikshaRide consists of three main components:
+
+1. Passenger App (Android) – for booking rides
+2. Driver App (Android) – for accepting and completing rides
+3. Firebase Backend – for real-time data and ride management
+
+This repository contains the core logic and structure required to run the MVP.
