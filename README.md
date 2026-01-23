@@ -36,3 +36,12 @@ This repository contains the core logic and structure required to run the MVP.
  - Request a rickshaw ride
  - Real-time ride status updates
  - Call the assigned driver directly
+
+Driver App
+
+ - Simple driver profile
+ - Toggle availability (online/offline)
+ - Receive nearby ride requests
+ - Accept or reject ride requests
+ - Call the passenger
+ - Mark the ride as completed
