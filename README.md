@@ -65,3 +65,14 @@ To keep the project realistic and maintainable, the following features are inten
  - Promo codes or surge pricing
  - Live GPS maps or navigation
  - These can be added later once the core system
+
+
+## 🛠 Tech Stack
+
+ - **Frontend:** Flutter
+ - **Backend:** Firebase
+    - Firestore (database)
+    - Firebase Authentication (optional / future)
+ - **Platform:** Android (Android-first approach)
+
+The stack was chosen for fast development, scalability, and suitability for solo developers.
