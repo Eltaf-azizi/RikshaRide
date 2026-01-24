@@ -37,7 +37,7 @@ This repository contains the core logic and structure required to run the MVP.
  - Real-time ride status updates
  - Call the assigned driver directly
 
-Driver App
+### Driver App
 
  - Simple driver profile
  - Toggle availability (online/offline)
@@ -45,3 +45,10 @@ Driver App
  - Accept or reject ride requests
  - Call the passenger
  - Mark the ride as completed
+
+
+### Admin / Backend
+
+ - Manage users and rides through Firebase
+ - Monitor ride status in real time
+ - Fixed pricing logic based on pickup and destination areas
