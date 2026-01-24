@@ -52,3 +52,16 @@ This repository contains the core logic and structure required to run the MVP.
  - Manage users and rides through Firebase
  - Monitor ride status in real time
  - Fixed pricing logic based on pickup and destination areas
+
+
+## 🚫 What This MVP Does NOT Include
+
+To keep the project realistic and maintainable, the following features are intentionally excluded from the MVP:
+
+ - In-app payments or wallets UI
+ - Ratings and reviews
+ - Chat system
+ - Push notifications
+ - Promo codes or surge pricing
+ - Live GPS maps or navigation
+ - These can be added later once the core system
