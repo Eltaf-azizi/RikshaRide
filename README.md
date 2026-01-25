@@ -76,3 +76,18 @@ To keep the project realistic and maintainable, the following features are inten
  - **Platform:** Android (Android-first approach)
 
 The stack was chosen for fast development, scalability, and suitability for solo developers.
+
+
+## 🗂 Firestore Database Schema
+### Users Collection
+
+ - uid (string)
+ - name (string)
+ - phone (string)
+ - role (rider/driver)
+ - status (online / offline)
+ - current_lat (number)
+ - current_lng (number)
+ - rating (number)
+
+
