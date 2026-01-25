@@ -90,4 +90,16 @@ The stack was chosen for fast development, scalability, and suitability for solo
  - current_lng (number)
  - rating (number)
 
+### Rides Collection
+
+ - ride_id (string)
+ - rider_id (string)
+ - driver_id (string or null)
+ - pickup_address (string)
+ - destination_address (string)
+ - pickup_geopoint (map: lat, lng)
+ - destination_geopoint (map: lat, lng)
+ - rider_fare_offer (number)
+ - final_price (number)
+ - status (searching / accepted / on_the_way / completed)
 
