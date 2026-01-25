@@ -103,3 +103,8 @@ The stack was chosen for fast development, scalability, and suitability for solo
  - final_price (number)
  - status (searching / accepted / on_the_way / completed)
 
+### Wallets Collection
+
+ - user_id (string)
+ - balance (number)
+ - transaction_history (array of maps)
