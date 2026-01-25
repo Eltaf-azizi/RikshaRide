@@ -119,4 +119,13 @@ The stack was chosen for fast development, scalability, and suitability for solo
  5. Nearby online drivers receive the request
  6. The first driver to accept is assigned
  7. Ride progresses through states:
-   - searching → accepted → on_the_way → completed
+    - searching → accepted → on_the_way → completed
+
+## 📱 Design & UX Principles
+
+ - Minimal UI with large buttons
+ - Simple English/Urdu-friendly labels
+ - Low data usage
+ - Fast load times
+ - Works well on low-end Android phones
+The app prioritizes usability over visual polish.
