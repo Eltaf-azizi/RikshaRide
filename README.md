@@ -108,3 +108,15 @@ The stack was chosen for fast development, scalability, and suitability for solo
  - user_id (string)
  - balance (number)
  - transaction_history (array of maps)
+
+
+## 🔄 Ride Flow (Simplified)
+
+ 1. Passenger selects pickup and destination areas
+ 2. App shows fixed estimated fare
+ 3. Passenger requests a ride
+ 4. Ride status is set to searching
+ 5. Nearby online drivers receive the request
+ 6. The first driver to accept is assigned
+ 7. Ride progresses through states:
+   - searching → accepted → on_the_way → completed
