@@ -128,6 +128,7 @@ The stack was chosen for fast development, scalability, and suitability for solo
  - Low data usage
  - Fast load times
  - Works well on low-end Android phones
+
 The app prioritizes usability over visual polish.
 
 ## 🚀 Getting Started (Development)
@@ -138,4 +139,18 @@ The app prioritizes usability over visual polish.
  4. Configure the Firebase project
  5. Connect Firestore to the app
  6. Run on a real Android device or emulator
-Note: For early testing, APK distribution is preferred over Play Store deployment.
+
+**Note:** For early testing, APK distribution is preferred over Play Store deployment
+
+
+## 📈 Future Improvements
+
+Once the MVP is validated, future versions may include:
+
+ - Maps and live driver tracking
+ - Ratings and reviews
+ - Digital wallet and payments
+ - Notifications
+ - Expansion to taxis and delivery services
+
+These features are intentionally postponed until real user demand is proven.
