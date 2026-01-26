@@ -154,3 +154,14 @@ Once the MVP is validated, future versions may include:
  - Expansion to taxis and delivery services
 
 These features are intentionally postponed until real user demand is proven.
+
+
+## 🧠 Philosophy Behind RikshaRide
+
+RikshaRide is built with a local-first mindset:
+
+ - Solve small, real problems
+ - Start with one area, then scale
+ - Build trust before adding complexity
+
+The project values execution, feedback, and iteration over perfection.
