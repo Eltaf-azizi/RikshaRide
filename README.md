@@ -129,3 +129,13 @@ The stack was chosen for fast development, scalability, and suitability for solo
  - Fast load times
  - Works well on low-end Android phones
 The app prioritizes usability over visual polish.
+
+## 🚀 Getting Started (Development)
+
+ 1. Install Flutter (latest stable)
+ 2. Install Android Studio (for SDK & emulator)
+ 3. Clone this repository
+ 4. Configure the Firebase project
+ 5. Connect Firestore to the app
+ 6. Run on a real Android device or emulator
+Note: For early testing, APK distribution is preferred over Play Store deployment.
