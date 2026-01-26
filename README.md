@@ -165,3 +165,8 @@ RikshaRide is built with a local-first mindset:
  - Build trust before adding complexity
 
 The project values execution, feedback, and iteration over perfection.
+
+
+## 📄 License
+
+This project is currently for educational and startup MVP purposes. Licensing can be defined later based on deployment and commercialization plans.
