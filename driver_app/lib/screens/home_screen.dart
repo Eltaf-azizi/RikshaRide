@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import '../services/firestore_service.dart';
 import '../services/auth_service.dart';
 import '../../../../models/ride.dart';
-import '../../../../models/user.dart';
+import '../../../../user.dart';
 import 'ride_control_screen.dart';
 import 'login_screen.dart';
 
