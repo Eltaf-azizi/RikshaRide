@@ -8,7 +8,10 @@ class Ride {
   final Map<String, double> destinationGeopoint;
   final double riderFareOffer;
   final double finalPrice;
-  final String status; // searching, accepted, on_the_way, completed
+  final String status; // searching, accepted, on_the_way, completed, cancelled
+  final DateTime createdAt;
+  final DateTime? acceptedAt;
+  final DateTime? completedAt;
 
   Ride({
     required this.rideId,
@@ -21,6 +24,9 @@ class Ride {
     required this.riderFareOffer,
     required this.finalPrice,
     required this.status,
+    required this.createdAt,
+    this.acceptedAt,
+    this.completedAt,
   });
 
   factory Ride.fromMap(Map<String, dynamic> map) {
@@ -32,9 +38,12 @@ class Ride {
       destinationAddress: map['destination_address'],
       pickupGeopoint: Map<String, double>.from(map['pickup_geopoint']),
       destinationGeopoint: Map<String, double>.from(map['destination_geopoint']),
-      riderFareOffer: map['rider_fare_offer'],
-      finalPrice: map['final_price'],
+      riderFareOffer: map['rider_fare_offer'].toDouble(),
+      finalPrice: map['final_price'].toDouble(),
       status: map['status'],
+      createdAt: DateTime.parse(map['created_at']),
+      acceptedAt: map['accepted_at'] != null ? DateTime.parse(map['accepted_at']) : null,
+      completedAt: map['completed_at'] != null ? DateTime.parse(map['completed_at']) : null,
     );
   }
 
@@ -50,6 +59,9 @@ class Ride {
       'rider_fare_offer': riderFareOffer,
       'final_price': finalPrice,
       'status': status,
+      'created_at': createdAt.toIso8601String(),
+      'accepted_at': acceptedAt?.toIso8601String(),
+      'completed_at': completedAt?.toIso8601String(),
     };
   }
 }

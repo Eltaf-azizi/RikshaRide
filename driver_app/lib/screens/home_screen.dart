@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../../firestore_service.dart';
+import '../services/firestore_service.dart';
 import '../services/auth_service.dart';
-import '../../../../models/ride.dart';
-import '../../../../ride_control_screen.dart';
+import '../models/ride.dart';
+import '../models/user.dart';
+import 'ride_control_screen.dart';
+import 'login_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,11 +17,28 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   bool isOnline = false;
   List<Ride> rideRequests = [];
+  User? currentDriver;
+  double driverRating = 5.0;
 
   @override
   void initState() {
     super.initState();
+    _loadDriverData();
     _listenForRideRequests();
+  }
+
+  void _loadDriverData() async {
+    final authService = Provider.of<AuthService>(context, listen: false);
+    final firestoreService = Provider.of<FirestoreService>(context, listen: false);
+    final user = authService.currentUser;
+    if (user != null) {
+      final driverData = await firestoreService.getUser(user.uid);
+      final rating = await firestoreService.getUserAverageRating(user.uid);
+      setState(() {
+        currentDriver = driverData;
+        driverRating = rating;
+      });
+    }
   }
 
   void _listenForRideRequests() {
@@ -31,16 +50,18 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  void _toggleAvailability() {
+  void _toggleAvailability() async {
     setState(() {
       isOnline = !isOnline;
     });
-    // Update user status in Firestore
     final authService = Provider.of<AuthService>(context, listen: false);
     final firestoreService = Provider.of<FirestoreService>(context, listen: false);
     final user = authService.currentUser;
     if (user != null) {
-      firestoreService.updateUserStatus(user.uid, isOnline ? 'online' : 'offline');
+      await firestoreService.updateUserStatus(user.uid, isOnline ? 'online' : 'offline');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(isOnline ? 'You are now Online' : 'You are now Offline')),
+      );
     }
   }
 
@@ -49,56 +70,176 @@ class _HomeScreenState extends State<HomeScreen> {
     final authService = Provider.of<AuthService>(context, listen: false);
     final user = authService.currentUser;
     if (user != null) {
-      await firestoreService.updateRideStatus(ride.rideId, 'accepted', driverId: user.uid);
-      Navigator.push(
+      try {
+        await firestoreService.updateRideStatus(ride.rideId, 'accepted', driverId: user.uid);
+        if (mounted) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => RideControlScreen(rideId: ride.rideId)),
+          );
+        }
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error: $e')));
+      }
+    }
+  }
+
+  void _logout() async {
+    final authService = Provider.of<AuthService>(context, listen: false);
+    final firestoreService = Provider.of<FirestoreService>(context, listen: false);
+    final user = authService.currentUser;
+    if (user != null) {
+      await firestoreService.updateUserStatus(user.uid, 'offline');
+    }
+    await authService.signOut();
+    if (mounted) {
+      Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => RideControlScreen(rideId: ride.rideId)),
+        MaterialPageRoute(builder: (_) => const LoginScreen()),
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Driver Home')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Text('Name: Driver Name', style: const TextStyle(fontSize: 18)),
-            Text('Phone: 1234567890'),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: _toggleAvailability,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: isOnline ? Colors.green : Colors.red,
-                padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-                textStyle: const TextStyle(fontSize: 20),
-              ),
-              child: Text(isOnline ? 'Online' : 'Offline'),
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Driver Dashboard'),
+          elevation: 0,
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.logout),
+              onPressed: _logout,
+              tooltip: 'Logout',
             ),
-            const SizedBox(height: 32),
-            if (isOnline) ...[
-              const Text('Ride Requests:', style: TextStyle(fontSize: 18)),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: rideRequests.length,
-                  itemBuilder: (context, index) {
-                    final ride = rideRequests[index];
-                    return ListTile(
-                      title: Text('${ride.pickupAddress} to ${ride.destinationAddress}'),
-                      subtitle: Text('\$${ride.finalPrice}'),
-                      trailing: ElevatedButton(
-                        onPressed: () => _acceptRide(ride),
-                        child: const Text('Accept'),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ],
           ],
         ),
+        body: currentDriver == null
+            ? const Center(child: CircularProgressIndicator())
+            : Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Driver Info Card
+                    Card(
+                      elevation: 4,
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              currentDriver!.name,
+                              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(height: 8),
+                            Row(
+                              children: [
+                                const Icon(Icons.phone, size: 16, color: Colors.grey),
+                                const SizedBox(width: 8),
+                                Text(currentDriver!.phone),
+                              ],
+                            ),
+                            const SizedBox(height: 8),
+                            Row(
+                              children: [
+                                const Icon(Icons.star, size: 16, color: Colors.amber),
+                                const SizedBox(width: 8),
+                                Text('$driverRating / 5.0', style: const TextStyle(fontWeight: FontWeight.w600)),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    // Status Toggle
+                    Center(
+                      child: Column(
+                        children: [
+                          Text(
+                            isOnline ? 'You are Online' : 'You are Offline',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: isOnline ? Colors.green : Colors.red,
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          ElevatedButton(
+                            onPressed: _toggleAvailability,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: isOnline ? Colors.green : Colors.grey,
+                              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 16),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                            ),
+                            child: Text(
+                              isOnline ? 'Go Offline' : 'Go Online',
+                              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    // Ride Requests
+                    if (isOnline) ...[
+                      Text(
+                        'Ride Requests (${rideRequests.length})',
+                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 12),
+                      Expanded(
+                        child: rideRequests.isEmpty
+                            ? const Center(
+                                child: Text('No ride requests available'),
+                              )
+                            : ListView.builder(
+                                itemCount: rideRequests.length,
+                                itemBuilder: (context, index) {
+                                  final ride = rideRequests[index];
+                                  return Card(
+                                    margin: const EdgeInsets.only(bottom: 12),
+                                    child: ListTile(
+                                      title: Text(
+                                        '${ride.pickupAddress} → ${ride.destinationAddress}',
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(fontWeight: FontWeight.w600),
+                                      ),
+                                      subtitle: Text('\$${ride.finalPrice.toStringAsFixed(2)}'),
+                                      trailing: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.green,
+                                        ),
+                                        onPressed: () => _acceptRide(ride),
+                                        child: const Text('Accept'),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                      ),
+                    ] else ...[
+                      const Expanded(
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.power_settings_new, size: 64, color: Colors.grey),
+                              SizedBox(height: 16),
+                              Text('Go online to receive ride requests'),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+              ),
       ),
     );
   }
