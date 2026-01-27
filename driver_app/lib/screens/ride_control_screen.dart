@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../services/firestore_service.dart';
 import '../services/auth_service.dart';
-import '../models/ride.dart';
+import '../../../../models/ride.dart';
 import 'home_screen.dart';
 
 class RideControlScreen extends StatefulWidget {
