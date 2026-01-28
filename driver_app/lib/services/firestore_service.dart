@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../../../user.dart';
-import '../../../../models/ride.dart';
-import '../../../../wallet.dart';
+import '../models/user.dart';
+import '../models/ride.dart';
+import '../models/wallet.dart';
 
 class FirestoreService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
