@@ -6,12 +6,23 @@ import 'screens/home_screen.dart';
 import 'screens/login_screen.dart';
 import 'services/auth_service.dart';
 import 'services/firestore_service.dart';
+import 'utils/theme.dart';
+import 'utils/logger.dart';
+import 'utils/constants.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  
+  try {
+    AppLogger.info('Main', 'Initializing Firebase...');
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    AppLogger.success('Main', 'Firebase initialized successfully');
+  } catch (e, stackTrace) {
+    AppLogger.error('Main', 'Firebase initialization failed', exception: e as Exception?, stackTrace: stackTrace);
+  }
+  
   runApp(const MyApp());
 }
 
@@ -26,11 +37,12 @@ class MyApp extends StatelessWidget {
         Provider<FirestoreService>(create: (_) => FirestoreService()),
       ],
       child: MaterialApp(
-        title: 'RikshaRide Driver',
-        theme: ThemeData(
-          primarySwatch: Colors.green,
-        ),
+        title: AppConstants.appName,
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+        themeMode: ThemeMode.light,
         home: const AuthWrapper(),
+        debugShowCheckedModeBanner: false,
       ),
     );
   }
