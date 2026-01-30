@@ -99,6 +99,23 @@ class FirestoreService {
     });
   }
 
+  Future<List<Ride>> getPassengerRideHistory(String passengerId) async {
+    QuerySnapshot snapshot = await _db
+        .collection('rides')
+        .where('rider_id', isEqualTo: passengerId)
+        .orderBy('created_at', descending: true)
+        .get();
+    return snapshot.docs.map((doc) => Ride.fromMap(doc.data() as Map<String, dynamic>)).toList();
+  }
+
+  Future<Ride?> getRide(String rideId) async {
+    DocumentSnapshot doc = await _db.collection('rides').doc(rideId).get();
+    if (doc.exists) {
+      return Ride.fromMap(doc.data() as Map<String, dynamic>);
+    }
+    return null;
+  }
+
   // Wallets collection
   Future<void> createWallet(Wallet wallet) async {
     await _db.collection('wallets').doc(wallet.userId).set(wallet.toMap());

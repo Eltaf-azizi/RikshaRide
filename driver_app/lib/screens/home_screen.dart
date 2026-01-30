@@ -5,6 +5,7 @@ import '../services/auth_service.dart';
 import '../models/ride.dart';
 import '../models/user.dart';
 import 'ride_control_screen.dart';
+import 'driver_profile_screen.dart';
 import 'login_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -110,9 +111,14 @@ class _HomeScreenState extends State<HomeScreen> {
           elevation: 0,
           actions: [
             IconButton(
-              icon: const Icon(Icons.logout),
-              onPressed: _logout,
-              tooltip: 'Logout',
+              icon: const Icon(Icons.person),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const DriverProfileScreen()),
+                );
+              },
+              tooltip: 'Profile',
             ),
           ],
         ),
