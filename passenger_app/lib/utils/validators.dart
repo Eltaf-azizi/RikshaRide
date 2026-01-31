@@ -1,5 +1,3 @@
-import 'package:passenger_app/utils/exceptions.dart';
-
 /// Validation utilities
 class AppValidators {
   /// Validate phone number

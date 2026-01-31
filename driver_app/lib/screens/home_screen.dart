@@ -6,7 +6,6 @@ import '../models/ride.dart';
 import '../models/user.dart';
 import 'ride_control_screen.dart';
 import 'driver_profile_screen.dart';
-import 'login_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -82,22 +81,6 @@ class _HomeScreenState extends State<HomeScreen> {
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error: $e')));
       }
-    }
-  }
-
-  void _logout() async {
-    final authService = Provider.of<AuthService>(context, listen: false);
-    final firestoreService = Provider.of<FirestoreService>(context, listen: false);
-    final user = authService.currentUser;
-    if (user != null) {
-      await firestoreService.updateUserStatus(user.uid, 'offline');
-    }
-    await authService.signOut();
-    if (mounted) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const LoginScreen()),
-      );
     }
   }
 

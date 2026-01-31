@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:driver_app/utils/exceptions.dart';
 import 'package:driver_app/utils/logger.dart';
 
@@ -13,14 +12,12 @@ class NetworkService {
   
   NetworkService._internal();
 
-  final Connectivity _connectivity = Connectivity();
-  StreamSubscription<List<ConnectivityResult>>? _subscription;
+  bool _isConnected = true;
 
   /// Check if device is connected to internet
   Future<bool> isConnected() async {
     try {
-      final result = await _connectivity.checkConnectivity();
-      return result.isNotEmpty && result.first != ConnectivityResult.none;
+      return _isConnected;
     } catch (e) {
       AppLogger.error('NetworkService', 'Error checking connectivity', exception: e as Exception?);
       throw NetworkException(
@@ -30,15 +27,13 @@ class NetworkService {
     }
   }
 
-  /// Listen to connectivity changes
-  Stream<bool> connectivityStream() {
-    return _connectivity.onConnectivityChanged.map((result) {
-      return result.isNotEmpty && result.first != ConnectivityResult.none;
-    });
+  /// Set connection status
+  void setConnected(bool connected) {
+    _isConnected = connected;
   }
 
   /// Dispose resources
   void dispose() {
-    _subscription?.cancel();
+    // No resources to dispose
   }
 }

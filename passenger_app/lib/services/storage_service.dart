@@ -1,7 +1,6 @@
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:passenger_app/utils/logger.dart';
 
-/// Local storage service using SharedPreferences
+/// Local storage service using in-memory cache
 class StorageService {
   static final StorageService _instance = StorageService._internal();
   
@@ -11,12 +10,11 @@ class StorageService {
   
   StorageService._internal();
 
-  late SharedPreferences _prefs;
+  final Map<String, dynamic> _cache = {};
   
   /// Initialize storage service
   Future<void> init() async {
     try {
-      _prefs = await SharedPreferences.getInstance();
       AppLogger.success('StorageService', 'Storage initialized');
     } catch (e) {
       AppLogger.error('StorageService', 'Error initializing storage', exception: e as Exception?);
@@ -27,7 +25,7 @@ class StorageService {
   /// Save string
   Future<void> saveString(String key, String value) async {
     try {
-      await _prefs.setString(key, value);
+      _cache[key] = value;
       AppLogger.debug('StorageService', 'Saved string: $key');
     } catch (e) {
       AppLogger.error('StorageService', 'Error saving string: $key', exception: e as Exception?);
@@ -38,7 +36,7 @@ class StorageService {
   /// Get string
   String? getString(String key) {
     try {
-      return _prefs.getString(key);
+      return _cache[key] as String?;
     } catch (e) {
       AppLogger.error('StorageService', 'Error getting string: $key', exception: e as Exception?);
       return null;
@@ -48,7 +46,7 @@ class StorageService {
   /// Save boolean
   Future<void> saveBoolean(String key, bool value) async {
     try {
-      await _prefs.setBool(key, value);
+      _cache[key] = value;
       AppLogger.debug('StorageService', 'Saved boolean: $key');
     } catch (e) {
       AppLogger.error('StorageService', 'Error saving boolean: $key', exception: e as Exception?);
@@ -59,7 +57,7 @@ class StorageService {
   /// Get boolean
   bool getBoolean(String key, {bool defaultValue = false}) {
     try {
-      return _prefs.getBool(key) ?? defaultValue;
+      return (_cache[key] as bool?) ?? defaultValue;
     } catch (e) {
       AppLogger.error('StorageService', 'Error getting boolean: $key', exception: e as Exception?);
       return defaultValue;
@@ -69,7 +67,7 @@ class StorageService {
   /// Save integer
   Future<void> saveInteger(String key, int value) async {
     try {
-      await _prefs.setInt(key, value);
+      _cache[key] = value;
       AppLogger.debug('StorageService', 'Saved integer: $key');
     } catch (e) {
       AppLogger.error('StorageService', 'Error saving integer: $key', exception: e as Exception?);
@@ -80,7 +78,7 @@ class StorageService {
   /// Get integer
   int getInteger(String key, {int defaultValue = 0}) {
     try {
-      return _prefs.getInt(key) ?? defaultValue;
+      return (_cache[key] as int?) ?? defaultValue;
     } catch (e) {
       AppLogger.error('StorageService', 'Error getting integer: $key', exception: e as Exception?);
       return defaultValue;
@@ -90,7 +88,7 @@ class StorageService {
   /// Save double
   Future<void> saveDouble(String key, double value) async {
     try {
-      await _prefs.setDouble(key, value);
+      _cache[key] = value;
       AppLogger.debug('StorageService', 'Saved double: $key');
     } catch (e) {
       AppLogger.error('StorageService', 'Error saving double: $key', exception: e as Exception?);
@@ -101,7 +99,7 @@ class StorageService {
   /// Get double
   double getDouble(String key, {double defaultValue = 0.0}) {
     try {
-      return _prefs.getDouble(key) ?? defaultValue;
+      return (_cache[key] as double?) ?? defaultValue;
     } catch (e) {
       AppLogger.error('StorageService', 'Error getting double: $key', exception: e as Exception?);
       return defaultValue;
@@ -111,7 +109,7 @@ class StorageService {
   /// Remove key
   Future<void> remove(String key) async {
     try {
-      await _prefs.remove(key);
+      _cache.remove(key);
       AppLogger.debug('StorageService', 'Removed key: $key');
     } catch (e) {
       AppLogger.error('StorageService', 'Error removing key: $key', exception: e as Exception?);
@@ -122,7 +120,7 @@ class StorageService {
   /// Clear all
   Future<void> clear() async {
     try {
-      await _prefs.clear();
+      _cache.clear();
       AppLogger.success('StorageService', 'Storage cleared');
     } catch (e) {
       AppLogger.error('StorageService', 'Error clearing storage', exception: e as Exception?);

@@ -192,9 +192,10 @@ class _DriverProfileScreenState extends State<DriverProfileScreen> {
                                 Expanded(
                                   child: OutlinedButton(
                                     onPressed: () {
+                                      final count = driverWallet?.transactionHistory.length ?? 0;
                                       ScaffoldMessenger.of(context).showSnackBar(
-                                        const SnackBar(
-                                          content: Text('Transaction history: ${(driverWallet?.transactionHistory.length ?? 0)} transactions'),
+                                        SnackBar(
+                                          content: Text('Transaction history: $count transactions'),
                                         ),
                                       );
                                     },

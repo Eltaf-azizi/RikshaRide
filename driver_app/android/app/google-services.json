@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "383359306173",
+    "project_id": "riksharide-9dfba",
+    "storage_bucket": "riksharide-9dfba.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:383359306173:android:9e94530e7f98386c88ead4",
+        "android_client_info": {
+          "package_name": "com.mycompany.riksharide"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUWhysU2AX5kZh4NHJnVJ-aPoDdawURXo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

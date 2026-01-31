@@ -41,18 +41,18 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'your-api-key',
-    appId: 'your-app-id',
-    messagingSenderId: 'your-sender-id',
-    projectId: 'your-project-id',
-    storageBucket: 'your-storage-bucket',
+    apiKey: 'AIzaSyAUWhysU2AX5kZh4NHJnVJ-aPoDdawURXo',
+    appId: '1:383359306173:android:9e94530e7f98386c88ead4',
+    messagingSenderId: '383359306173',
+    projectId: 'riksharide-9dfba',
+    storageBucket: 'riksharide-9dfba.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'your-api-key',
-    appId: 'your-app-id',
-    messagingSenderId: 'your-sender-id',
-    projectId: 'your-project-id',
-    storageBucket: 'your-storage-bucket',
+    apiKey: 'AIzaSyAUWhysU2AX5kZh4NHJnVJ-aPoDdawURXo',
+    appId: '1:383359306173:android:9e94530e7f98386c88ead4',
+    messagingSenderId: '383359306173',
+    projectId: 'riksharide-9dfba',
+    storageBucket: 'riksharide-9dfba.firebasestorage.app',
   );
 }
