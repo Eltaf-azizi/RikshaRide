@@ -1,0 +1,29 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users can only read/write their own data
+    match /users/{userId} {
+      allow read, write: if request.auth.uid == userId;
+    }
+    
+    // Rides - passengers can read their own, drivers can read assigned
+    match /rides/{rideId} {
+      allow read: if request.auth.uid == resource.data.rider_id || 
+                     request.auth.uid == resource.data.driver_id;
+      allow create: if request.auth.uid == request.resource.data.rider_id;
+      allow update: if request.auth.uid == resource.data.driver_id;
+    }
+    
+    // Wallets - users can only read their own
+    match /wallets/{userId} {
+      allow read, write: if request.auth.uid == userId;
+    }
+    
+    // Ratings
+    match /ratings/{ratingId} {
+      allow read: if request.auth.uid == resource.data.from_user_id || 
+                     request.auth.uid == resource.data.to_user_id;
+      allow create: if request.auth.uid == request.resource.data.from_user_id;
+    }
+  }
+}
