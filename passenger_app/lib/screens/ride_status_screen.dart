@@ -31,8 +31,8 @@ class _RideStatusScreenState extends State<RideStatusScreen> {
   Widget build(BuildContext context) {
     final firestoreService = Provider.of<FirestoreService>(context, listen: false);
 
-    return WillPopScope(
-      onWillPop: () async => false,
+    return PopScope(
+      canPop: false,
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Ride Status'),
@@ -137,7 +137,7 @@ class _RideStatusScreenState extends State<RideStatusScreen> {
                   children: [
                     // Status Card
                     Card(
-                      color: statusColor.withOpacity(0.1),
+                      color: statusColor.withValues(alpha: 0.1),
                       child: Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Column(
