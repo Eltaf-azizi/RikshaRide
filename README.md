@@ -16,22 +16,6 @@ The goal of RikshaRide is to solve real, local transportation problems:
 RikshaRide provides a simple request-and-accept system with fixed area-based pricing, making rides predictable and fair for both passengers and drivers.
 
 
-
-
-
-
-### ✅ UI/UX Enhancements
- - [x] Material Design implementation
- - [x] Responsive layouts for various screen sizes
- - [x] Loading indicators and error messages
- - [x] Toast notifications for user feedback
- - [x] Consistent theme across both apps
- - [x] Navigation between screens
- - [x] Profile screens with detailed information
- - [x] Ride history with visual route representation
-
----
-
 ## 🧱 System Overview
 
 RikshaRide consists of three main components:
