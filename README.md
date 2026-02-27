@@ -16,21 +16,7 @@ The goal of RikshaRide is to solve real, local transportation problems:
 RikshaRide provides a simple request-and-accept system with fixed area-based pricing, making rides predictable and fair for both passengers and drivers.
 
 
-## ✨ Completed Features (MVP)
 
-### ✅ Passenger App
- - [x] Phone-based OTP authentication
- - [x] Select pickup area from predefined list
- - [x] Select destination area from predefined list
- - [x] View estimated fare before booking
- - [x] Request a rickshaw ride
- - [x] Real-time ride status updates (searching, accepted, on_the_way, completed)
- - [x] Call the assigned driver directly
- - [x] Cancel ride requests
- - [x] Rate and review drivers
- - [x] View ride history with details
- - [x] User profile with statistics
- - [x] Wallet integration (balance display)
 
 ### ✅ Driver App
  - [x] Phone-based OTP authentication
