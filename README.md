@@ -18,30 +18,7 @@ RikshaRide provides a simple request-and-accept system with fixed area-based pri
 
 
 
-### ✅ Driver App
- - [x] Phone-based OTP authentication
- - [x] Simple driver profile with avatar
- - [x] Toggle availability (online/offline)
- - [x] Receive and view nearby ride requests in real-time
- - [x] Accept or reject ride requests
- - [x] Call the passenger
- - [x] Mark ride as completed
- - [x] Rate and review passengers
- - [x] View earnings wallet and balance
- - [x] Transaction history
- - [x] Driver profile with statistics
- - [x] Rating display
 
-### ✅ Backend & Database
- - [x] Firebase Authentication (Phone OTP)
- - [x] Firestore real-time database setup
- - [x] User management (Drivers & Passengers)
- - [x] Ride management with status transitions
- - [x] Wallet system for earnings
- - [x] Rating and review system
- - [x] Error handling and validation
- - [x] Enhanced Firestore service with error management
- - [x] Data persistence and sync
 
 ### ✅ UI/UX Enhancements
  - [x] Material Design implementation
