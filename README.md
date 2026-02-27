@@ -24,7 +24,7 @@ RikshaRide consists of three main components:
 2. **Driver App (Android)** – for accepting and completing rides
 3. **Firebase Backend** – for real-time data and ride management
 
----
+
 
 ## 📱 Areas Supported (Quetta)
 
@@ -38,7 +38,7 @@ The app includes predefined pricing for these areas:
 
 Each area pair has fixed pricing (in Pakistani Rupees).
 
----
+
 
 ## 🗂 Firestore Database Schema
 
@@ -91,7 +91,6 @@ Each area pair has fixed pricing (in Pakistani Rupees).
 - created_at (timestamp)
 ```
 
----
 
 ## 🔄 Ride Flow
 
@@ -105,7 +104,6 @@ Each area pair has fixed pricing (in Pakistani Rupees).
 8. Both **passenger and driver** rate each other
 9. **Fare is processed** and added to driver's wallet
 
----
 
 ## 🛠 Tech Stack
 
@@ -121,7 +119,6 @@ Each area pair has fixed pricing (in Pakistani Rupees).
 - **Location Services:** Geolocator
 - **Networking:** Connectivity Plus
 
----
 
 ## 📁 Project Structure
 
@@ -193,7 +190,6 @@ RikshaRide/
 └── README.md
 ```
 
----
 
 ## 🚀 Getting Started (Development Setup)
 
@@ -248,7 +244,6 @@ RikshaRide/
    flutter run
    ```
 
----
 
 ## 🧪 Testing the App
 
@@ -282,7 +277,6 @@ RikshaRide/
 2. Tap "Ride History"
 3. View all past rides with details
 
----
 
 ## 📊 Database Rules (Firestore Security)
 
@@ -325,7 +319,6 @@ service cloud.firestore {
 }
 ```
 
----
 
 ## 📦 Building for Release
 
@@ -344,7 +337,6 @@ flutter build appbundle
 # Output: build/app/outputs/bundle/release/app-release.aab
 ```
 
----
 
 ## 🔐 Security Considerations
 
@@ -358,7 +350,6 @@ Before deploying to production:
 6. **Use HTTPS** - All API calls should be secure
 7. **Implement Verification** - For phone numbers and user identity
 
----
 
 ## 🚫 Known Limitations (MVP)
 
@@ -373,7 +364,6 @@ Before deploying to production:
 
 These limitations are intentional for the MVP phase and will be addressed in future updates.
 
----
 
 ## 📈 Future Roadmap
 
@@ -394,7 +384,6 @@ These limitations are intentional for the MVP phase and will be addressed in fut
 - [ ] Ride sharing (multiple passengers)
 - [ ] AI-based pricing surge
 
----
 
 ## 🐛 Troubleshooting
 
@@ -419,7 +408,6 @@ These limitations are intentional for the MVP phase and will be addressed in fut
 - Check both apps are running simultaneously
 - Verify Firestore rules allow read access
 
----
 
 ## 📞 Support & Contact
 
@@ -428,7 +416,6 @@ For issues, questions, or feedback:
 - Email: support@riksharide.app
 - WhatsApp: +92-XXX-XXXXXXX
 
----
 
 ## 👥 Contributing
 
@@ -439,13 +426,11 @@ Contributions are welcome! Please:
 4. Push to the branch
 5. Create a Pull Request
 
----
 
 ## 📄 License
 
 This project is licensed under the MIT License - see LICENSE file for details.
 
----
 
 ## 🙏 Acknowledgments
 
@@ -453,9 +438,5 @@ This project is licensed under the MIT License - see LICENSE file for details.
 - Thanks to the Flutter and Firebase communities
 - Special thanks to all testers and feedback providers
 
----
 
-**Made with ❤️ for Quetta Transportation**
 
-Last Updated: January 30, 2026
-Version: 1.0.0 (MVP Complete)
